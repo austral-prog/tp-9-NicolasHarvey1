@@ -1,48 +1,66 @@
-
 def create_inventory(items):
-    """Create a dict that tracks the amount (count) of each element on the `items` list.
-
-    :param items: list - list of items to create an inventory from.
-    :return: dict - the inventory dictionary.
-    """
-    return {}
-
+    my_dict = dict()
+    for i in range(len(items)):
+        if items[i] in my_dict:
+            my_dict[items[i]] += 1
+        else:
+            my_dict[items[i]] = 1
+    return my_dict
 
 def add_items(inventory, items):
-    """Add or increment items in inventory using elements from the items `list`.
-
-    :param inventory: dict - dictionary of existing inventory.
-    :param items: list - list of items to update the inventory with.
-    :return: dict - the inventory updated with the new items.
-    """
-    return {}
-
+    for item in items:
+        if item in inventory:
+            inventory[item] += 1
+        else:
+            inventory[item] = 1
+    return inventory
 
 def decrement_items(inventory, items):
-    """Decrement items in inventory using elements from the `items` list.
+    my_dict = dict()
+    dict_items = create_inventory(items)
+    valueIn = list(inventory.values())
+    valueIt = list(dict_items.values())
+    valueTot = []
 
-    :param inventory: dict - inventory dictionary.
-    :param items: list - list of items to decrement from the inventory.
-    :return: dict - updated inventory with items decremented.
-    """
-    return {}
+    for i in range(len(valueIn)):
+        x = valueIn[i] - valueIt[i]
+        if x > 0:
+            valueTot.append(x)
+        else:
+            valueTot.append(0)
 
+    keyTot = list(inventory.keys())
+    index = 0
+    while(index < len(keyTot)):
+        key = keyTot[index]
+        value = valueTot[index]
+        my_dict[key] = value
+        index += 1
+    return my_dict
 
 def remove_item(inventory, item):
-    """Remove item from inventory if it matches `item` string.
-
-    :param inventory: dict - inventory dictionary.
-    :param item: str - item to remove from the inventory.
-    :return: dict - updated inventory with item removed. Current inventory if item does not match.
-    """
-    return {}
-
+    found = False
+    for key in inventory.keys():
+        if key == item:
+            found = True 
+            break
+        else:
+            found = False
+    if found == True:
+        del inventory[item]
+        return inventory
+    else:
+        return inventory
 
 def list_inventory(inventory):
-    """Create a list containing all (item_name, item_count) pairs in inventory.
-
-    :param inventory: dict - an inventory dictionary.
-    :return: list of tuples - list of key, value pairs from the inventory dictionary.
-    """
-    return {}
-
+    for key, value in inventory.items():
+        if value == 0:
+            found = True 
+            break
+        else:
+            found = False
+    if found == True:
+        del inventory[key]
+        return list(inventory.items())
+    else:
+        return list(inventory.items())
